@@ -1,0 +1,15 @@
+{
+  "volta": {
+    "node": "12.14.1",
+    "yarn": "1.21.1"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "moment": "^2.24.0"
+  },
+  "name": "01",
+  "version": "1.0.0",
+  "main": "server.js",
+  "license": "MIT"
+}

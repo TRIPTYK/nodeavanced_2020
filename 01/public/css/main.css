@@ -1,0 +1,13 @@
+body{
+    font-family: 'Tahoma', sans-serif;
+    font-size: 1rem;
+    background: #2a2a2a;
+    color: #fefefe;
+}
+h1{
+    text-align: center;
+    text-transform: capitalize;
+}
+.error{
+    background:red;
+}
