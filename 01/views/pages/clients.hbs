@@ -1,6 +1,6 @@
 <h1>Clients List </h1>
 <ul>
 {{#each clients}}
-<li>{{this.lastname}} || {{this.firstname}}</li>
+<li>{{this.lastname}} || {{this.firstname}} <a href="/clients/{{this.id}}">Editer</a> <a href="/clients/{{this.id}}">Supprimer</a></li>
 {{/each}}
 </ul>

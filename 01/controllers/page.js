@@ -42,3 +42,26 @@ exports.clientscreate = async (req, res, next) => {
     console.log(e);
   }
 };
+
+exports.getClient = async (req, res, next) => {
+  let id = req.params.id;
+  let client = await Client.findOne({
+    _id: id
+  })
+  res.render("pages/edit-form", {
+    firstname: client.firstname,
+    lastname: client.lastname,
+    id
+  })
+}
+
+exports.editClient = async (req, res, next) => {
+  let id = req.params.id;
+    
+  res.send(
+    await Client.updateOne(
+      {_id:id},
+      req.body
+    )
+  );
+}

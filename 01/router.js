@@ -15,7 +15,12 @@ router.get('/',pageController.index)
 router.get('/about',pageController.about)
 router.get('/clients', pageController.clients)
 router.post('/clients', pageController.clientscreate)
-router.get('/clients/:id', pageController.clients)
+
+
+router.get('/clients/:id', pageController.getClient)
+router.patch('/clients/:id', pageController.editClient)
+
+
 router.get('/client_form', pageController.clientform)
 //error managememnt
 router.use((req, res, next)=> {
