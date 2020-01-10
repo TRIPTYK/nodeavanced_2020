@@ -32,8 +32,8 @@ exports.clientscreate = async (req, res, next) => {
   try {
     let client = new Client(req.body);
     try{
-        await client.save();
-       return res.redirect('/clients/')
+       res.send(await client.save());
+       
       
     }catch(e){
         console.log(e)
