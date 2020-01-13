@@ -34,10 +34,10 @@ let movieSchema = new Schema({
         production: {
             company:String,
             director:String
-        },
-        id:String,
-        type:String
-    }
+        }
+    },
+    id:String,
+    type:String
 })
 
 module.exports = mongoose.model('Movie',movieSchema);
