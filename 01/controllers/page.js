@@ -65,3 +65,13 @@ exports.editClient = async (req, res, next) => {
     )
   );
 }
+
+exports.deleteClient = async (req, res, next) => {
+  let id = req.params.id;
+    
+  res.send(
+    await Client.deleteOne(
+      {_id:id}
+    )
+  );
+}

@@ -19,6 +19,7 @@ router.post('/clients', pageController.clientscreate)
 
 router.get('/clients/:id', pageController.getClient)
 router.patch('/clients/:id', pageController.editClient)
+router.delete('/clients/:id', pageController.deleteClient)
 
 
 router.get('/client_form', pageController.clientform)

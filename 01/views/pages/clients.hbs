@@ -1,6 +1,10 @@
 <h1>Clients List </h1>
 <ul>
-{{#each clients}}
-<li>{{this.lastname}} || {{this.firstname}} <a href="/clients/{{this.id}}">Editer</a> <a href="/clients/{{this.id}}">Supprimer</a></li>
-{{/each}}
+    {{#each clients}}
+        <li>{{this.lastname}} || {{this.firstname}} 
+            <a href="/clients/{{this.id}}">Editer</a> 
+            <button data-id={{this.id}} onclick="deleteClient(this)">Supprimer</button></li>
+    {{/each}}
 </ul>
+
+<script src="/js/delete_client.js"></script>
