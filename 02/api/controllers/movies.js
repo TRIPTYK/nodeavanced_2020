@@ -25,7 +25,9 @@ const getSort = (sortString)=>{
 }
 
 const getLinks = (limite,page,total,sort,fields)=>{
-    let lastPage = total/limite;
+    let lastPage = Math.floor(Math.round(total/limite));
+    if(sort === undefined) sort='';
+    if(fields === undefined) fields='';
     let self= `http://localhost:${process.env.PORT}/movies?page=${page}&sorts=${sort},&fields=${fields}`;
     let prev= `http://localhost:${process.env.PORT}/movies?page=${page-1}&sorts=${sort},&fields=${fields}`;
     let next= `http://localhost:${process.env.PORT}/movies?page=${page+1}&sorts=${sort},&fields=${fields}`;
