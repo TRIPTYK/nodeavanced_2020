@@ -36,7 +36,9 @@ let movieSchema = new Schema({
             director:String
         }
     },
-    id:String,
+    id:{
+        type:String
+    },
     type:String
 })
 

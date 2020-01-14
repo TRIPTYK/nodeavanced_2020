@@ -1,5 +1,4 @@
 const [major] = process.versions.node.split('.').map(parseFloat)
-console.log(major)
 if(major < 10){
     console.log('Ta version de node est trop faible il faut mettre le serveur a jour.')
 }
