@@ -5,7 +5,7 @@ const MoviesController = require('../controllers/movies')
 Router
     .route('/')
         .get(MoviesController.index)
-        .post(MoviesController.createMovie)
+        .post(MoviesController.validationRules(),MoviesController.validate,MoviesController.createMovie)
 
 Router
     .route('/:id')

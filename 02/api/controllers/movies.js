@@ -11,7 +11,6 @@ const getFieldsProjection = (fieldsString) => {
         return {}
     }
 }
-
 const getSort = (sortString) => {
     try {
         let sorts = sortString.split(',')
@@ -54,37 +53,61 @@ exports.index = async (req, res) => {
     res.json({ links, data: { movies } })
 }
 exports.getById = async (req, res) => {
-    let projection = getFieldsProjection(req.query.fields) || {};
-    let { id } = req.params
-    let query = Movie.findById(id, projection)
-    let movie = await query.exec()
-    res.json({ data: {movies:[movie] }})
+    try {
+        let projection = getFieldsProjection(req.query.fields) || {};
+        let { id } = req.params
+        let query = Movie.findById(id, projection)
+        let movie = await query.exec()
+        if (!movie) res.status(404).json({ error: { message: `No users at the id :${id}` } })
+        res.json({ data: { movies: [movie] } })
+    } catch (e) {
+        res.status(500).json({ error: { message: `These was a internal error` } })
+    }
 }
-exports.createMovie = async (req,res)=>{
-    try{
+exports.createMovie = async (req, res) => {
+    try {
         let movie = await Movie.create(req.body)
         res.status(201).json(movie)
-    } catch(e){
-        res.status(500).json({error:{message:e.message}})
+    } catch (e) {
+        res.status(500).json({ error: { message: e.message } })
     }
 }
-exports.updateMovie = async (req,res)=>{
-    let {id} = req.params;
-    try{
-        let movie = await Movie.findByIdAndUpdate(id,req.body,{useFindAndModify:false, new: true });
+exports.updateMovie = async (req, res) => {
+    let { id } = req.params;
+    try {
+        let movie = await Movie.findByIdAndUpdate(id, req.body, { useFindAndModify: false, new: true });
         res.status(200).json(movie)
 
-    } catch(e){
-        res.status(500).json({error:{message:e.message}})
+    } catch (e) {
+        res.status(500).json({ error: { message: e.message } })
     }
 }
-exports.deleteMovie = async (req,res)=>{
-    let {id} = req.params;
-    try{
+exports.deleteMovie = async (req, res) => {
+    let { id } = req.params;
+    try {
         await Movie.findByIdAndDelete(id);
         res.status(204).send();
 
-    } catch(e){
-        res.status(500).json({error:{message:e.message}})
+    } catch (e) {
+        res.status(500).json({ error: { message: e.message } })
     }
+}
+const { body, validationResult } = require('express-validator')
+exports.validationRules = () => {
+    return [
+        body('fields.title','le titre doit etre rempli').notEmpty(),
+        body('fields.year','l\'année doit etre rempli').notEmpty()
+    ]
+}
+exports.validate = async (req, res, next) => {
+    const errors = validationResult(req)
+    if (errors.isEmpty()) {
+        return next()
+    }
+    const extractedErrors = []
+    errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }))
+
+    return res.status(422).json({
+        errors: extractedErrors,
+    })
 }
