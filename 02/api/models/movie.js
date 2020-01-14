@@ -19,11 +19,12 @@ let movieSchema = new Schema({
         plot:{
             type:String,
             minLength:0,
-            maxLength:64
+            maxLength:64,
+            index:'text'
         },
         title:{
             type:String,
-            required:true
+            index:'text'
         },
         rank:{
             type:Number
@@ -41,5 +42,6 @@ let movieSchema = new Schema({
     },
     type:String
 })
-
-module.exports = mongoose.model('Movie',movieSchema);
+let model =  mongoose.model('Movie',movieSchema);
+model.ensureIndexes()
+module.exports = model;

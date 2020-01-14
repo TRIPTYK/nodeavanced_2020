@@ -9,7 +9,7 @@ dotEnv.config({path: './development.env'})
 //mongo db management
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise;
-
+mongoose.set('debug',true)
 mongoose.connect(process.env.DB_HOST,{useNewUrlParser: true ,useUnifiedTopology: true })
 .then(()=>{
     console.log('Mongodb server is running and ready to be called')
